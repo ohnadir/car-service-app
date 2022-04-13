@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dogs = () => {
+const Services = () => {
     return (
         <div>
             <h2>THis is Dogs Site</h2>
@@ -8,4 +8,4 @@ const Dogs = () => {
     );
 };
 
-export default Dogs;
+export default Services;
