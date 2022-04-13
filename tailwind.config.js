@@ -1,9 +1,6 @@
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
-  theme: {
-    extend: {},
-  },
+  content: ['./src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js'],
   plugins: [
-    require('flowbite/plugin')
-]
+    require('tw-elements/dist/plugin')
+  ]
 }
