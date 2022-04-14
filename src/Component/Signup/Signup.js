@@ -11,15 +11,15 @@ const Signup = () => {
                     <h1 className='text-center text-xl mb-8 text-slate-400'>Sign Up</h1>
                     <div className='mb-8'>
                         <label className='text-slate-400' htmlFor="Email">Email</label>
-                        <input className='w-full bg-gray-100 border-0' type="email" name="email" id="" />
+                        <input className='w-full p-1 bg-gray-100 border-0' type="email" name="email" id="" />
                     </div>
                     <div className='mb-8'>
                         <label className='text-slate-400' htmlFor="password">Password</label>
-                        <input className='w-full bg-gray-100 border-0' type="password" name="" id="" />
+                        <input className='w-full p-1 bg-gray-100 border-0' type="password" name="" id="" />
                     </div>
                     <div className='mb-8'>
                         <label className='text-slate-400' htmlFor="password">Confirmation Password</label>
-                        <input className='w-full bg-gray-100 border-0' type="password" name="" id="" />
+                        <input className='w-full p-1 bg-gray-100 border-0' type="password" name="" id="" />
                     </div>
                     <button className='w-full bg-cyan-600 py-2 text-white' type='submit'>Sign Up</button>
                     <p className='text-sm text-right mb-8 text-slate-400'>Already have Account ! <span><Link className='text-cyan-600' to='/login'>Login</Link></span></p>

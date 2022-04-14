@@ -11,11 +11,11 @@ const Login = () => {
                     <h1 className='text-center text-xl mb-8 text-slate-400'>Log In</h1>
                     <div className='mb-8'>
                         <label className='text-slate-400' htmlFor="Email">Email</label>
-                        <input className='w-full bg-gray-100 border-0' type="email" name="email" id="" />
+                        <input className='w-full p-1 bg-gray-100 border-0' type="email" name="email" id="" />
                     </div>
                     <div className='mb-8'>
                         <label className='text-slate-400' htmlFor="password">Password</label>
-                        <input className='w-full bg-gray-100 border-0' type="password" name="" id="" />
+                        <input className='w-full p-1 bg-gray-100 border-0' type="password" name="" id="" />
                     </div>
                     <button className='w-full bg-cyan-600 py-2 text-white' type='submit'>Login</button>
                     <p className='text-sm text-right text-slate-400'>Create an Account ! <span><Link className='text-cyan-600' to='/signup'>Sign up</Link></span></p>
