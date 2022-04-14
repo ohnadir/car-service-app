@@ -10,6 +10,7 @@ import Signup from './Component/Signup/Signup';
 import ServiceDetails from './Component/ServiceDetails/ServiceDetails';
 import { createContext } from 'react';
 import useServices from './Component/Hooks/useServices';
+import RequireAuth from './Component/RequireAuth/RequireAuth';
 
 export const ServiceContext = createContext();
 function App() {
@@ -21,7 +22,12 @@ function App() {
         <Routes>
           <Route path='/home' element={<Home></Home>}></Route>
           <Route path='/' element={<Home></Home>}></Route>
-          <Route path='/services' element={<Services></Services>}></Route>
+          <Route path='/services' element={
+            <RequireAuth>
+              <Services></Services>
+            </RequireAuth>
+            
+          }></Route>
           <Route path='/services/:serviceId' element={<ServiceDetails></ServiceDetails>}></Route>
           <Route path='/experts' element={<Experts></Experts>}></Route>
           <Route path='/about' element={<About></About>}></Route>
