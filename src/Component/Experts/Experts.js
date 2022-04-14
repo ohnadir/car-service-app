@@ -19,7 +19,7 @@ const Experts = () => {
     return (
         <div>
 
-            <div className='my-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:max-w-5xl mx-auto md:max-w-2xl'>
+            <div className='my-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:max-w-6xl mx-auto md:max-w-2xl'>
                 {
                     experts.map(expert => <Expert
                         key={expert.id}

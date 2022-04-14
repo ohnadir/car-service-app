@@ -5,6 +5,7 @@ import CustomLink from "../CustomLink/CustomLink"
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
 import { signOut } from "firebase/auth";
+
 function Header() {
   const [open, setOpen] = useState(false);
   const [user] = useAuthState(auth);
@@ -35,7 +36,10 @@ function Header() {
             <CustomLink to='/services'>Services</CustomLink>
             <CustomLink to='/experts'>Experts</CustomLink>
             <CustomLink to='/about'>About</CustomLink>
-            <CustomLink to='/login'>Login</CustomLink>
+            {user ? <button onClick={handleSignOut}>Sign Out</button>
+                :
+              <CustomLink to='/login'>Login</CustomLink>
+            }
             </div>
         </div>
       )}

@@ -3,7 +3,7 @@ import useServices from '../Hooks/useServices';
 import Service from '../Service/Service';
 
 const Services = () => {
-    const [services]= useServices();
+    const [services] = useServices();
     return (
         <div id='services'>
 

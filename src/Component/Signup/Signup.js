@@ -1,36 +1,86 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {FcGoogle} from 'react-icons/fc'
 import {FaFacebookF} from 'react-icons/fa'
 import { AiFillGithub } from 'react-icons/ai';
-import {useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth'
+import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 const Signup = () => {
-    const [email, setEmail] = useState([]);
-    const [password, setPassword] = useState([]);
-    const [confirmationPassword, setConfirmationPassword] = useState([]);
+    const navigate = useNavigate();
+    const [email, setEmail] = useState({value: "", error:""});
+    const [password, setPassword] = useState({value: "", error:""});
+    const [confirmationPassword, setConfirmationPassword] = useState({value: "", error:""});
     const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle, user1] = useSignInWithGoogle(auth);
+    const [signInWithFacebook, user2] = useSignInWithFacebook(auth);
+    const [signInWithGithub, user3] = useSignInWithGithub(auth);
+    if (user) {
+        navigate('/home');
+    }
+    if (user1) {
+        navigate('/home');
+    }
+    if (user2) {
+        navigate('/home');
+    }
+    if (user3) {
+        navigate('/home');
+    }
+
 
     const handleFormReload = (event) => {
         event.preventDefault();
+        
     }
 
     const handleEmail = (event) => {
-        setEmail(event.target.value);
+        const emailInput = event.target.value;
+        if (/\S+@\S+\.\S+/.test(emailInput)) {
+            setEmail({value:emailInput, error:""})
+        } else {
+            setEmail({value:"", error:"Please provide a Valia Email"})
+        }
+        // setEmail(event.target.value);
+        console.log(emailInput);
     }
     
     const handlePassword = (event) => {
-        setPassword(event.target.value);
+        const passwordInput = event.target.value;
+        if (passwordInput.length < 7) {
+            setPassword({value:"", error:"Password is too short"})
+        } else {
+            setPassword({value:passwordInput, error:""})
+        }
+        // setPassword(event.target.value);
+        console.log(passwordInput);
     }
 
     const handleConfirmationPassword = (event) => {
-        setConfirmationPassword(event.target.value);
-        console.log(confirmationPassword);
+        const confirmationPasswordInput = event.target.value;
+        if (confirmationPasswordInput !== password.value) {
+            setConfirmationPassword({value:"", error:"Password Mismatch"})
+        } else {
+            setConfirmationPassword({value:confirmationPasswordInput, error:""})
+        }
+        // setConfirmationPassword(event.target.value);
+        // console.log(confirmationPassword);
     }
 
     const handleSubmit = () => {
-        createUserWithEmailAndPassword(email, password);
-        console.log(user);
+        createUserWithEmailAndPassword(email.value, password.value);
+        console.log("click");
+        console.log(email.value);
+        console.log(password.value);
+    }
+    const handleGoogleSignIn = () => {
+        signInWithGoogle();
+    }
+    const handleFacebookSignIn = () => {
+        signInWithFacebook();
+    }
+    const handleGithubSignIn = () => {
+        signInWithGithub();
     }
     return (
         <div className='flex justify-center items-center h-[92vh]'>
@@ -40,15 +90,24 @@ const Signup = () => {
                     <div className='mb-8'>
                         <label className='text-slate-400' htmlFor="Email">Email</label>
                         <input onChange={handleEmail} className='w-full p-1 bg-gray-100 border-0' type="email" name="email" id="" />
+                        {email.error && (
+                            <p className='text-red-600 text-sm'>{email.error}</p>
+                        )}
                     </div>
 
                     <div className='mb-8'>
                         <label className='text-slate-400' htmlFor="password">Password</label>
                         <input onChange={handlePassword} className='w-full p-1 bg-gray-100 border-0' type="password" name="password" id="" />
+                        {password.error && (
+                            <p className='text-red-600 text-sm'>{password.error}</p>
+                        )}
                     </div>
                     <div className='mb-8'>
                         <label className='text-slate-400' htmlFor="password">Confirmation Password</label>
                         <input onChange={handleConfirmationPassword} className='w-full p-1 bg-gray-100 border-0' type="password" name="confirmationPassword" id="" />
+                        {confirmationPassword.error && (
+                            <p className='text-red-600 text-sm'>{confirmationPassword.error}</p>
+                        )}
                     </div>
                     <button onClick={handleSubmit} className='w-full bg-cyan-600 py-2 text-white' type='submit'>Sign Up</button>
                     <p className='text-sm text-right mb-8 text-slate-400'>Already have Account ! <span><Link className='text-cyan-600' to='/login'>Login</Link></span></p>
@@ -58,9 +117,9 @@ const Signup = () => {
                         <span className='w-[186px]'><hr /></span>
                     </div>
                     <div className='flex gap-8 items-center justify-center'>
-                        <button className='text-4xl border p-4'><FcGoogle /></button>
-                        <button className='text-4xl border p-4'><FaFacebookF /></button>
-                        <button className='text-4xl border p-4'><AiFillGithub/></button>
+                        <button onClick={handleGoogleSignIn} className='text-4xl border p-4'><FcGoogle /></button>
+                        <button onClick={handleFacebookSignIn} className='text-4xl border p-4'><FaFacebookF /></button>
+                        <button onClick={handleGithubSignIn} className='text-4xl border p-4'><AiFillGithub/></button>
                     </div>
                 </form>
             </div>
