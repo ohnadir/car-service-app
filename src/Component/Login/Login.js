@@ -17,15 +17,17 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
-
     if (user1) {
         navigate('/home');
+        navigate(from, { replace: true });
     }
     if (user2) {
         navigate('/home');
+        navigate(from, { replace: true });
     }
     if (user3) {
         navigate('/home');
+        navigate(from, { replace: true });
     }
     const handleFormReload = (event) => {
         event.preventDefault();
@@ -40,6 +42,8 @@ const Login = () => {
     }
     if (user) {
         navigate('/home');
+        navigate(from, { replace: true });
+        
     }
     const handleLogin = () => {
         signInWithEmailAndPassword(email, password);
@@ -54,6 +58,7 @@ const Login = () => {
     const handleGithubSignIn = () => {
         signInWithGithub();
     }
+    navigate(from, { replace: true });
     return (
         <div className='flex justify-center items-center h-[92vh]'>
             <div className='w-[500px] shadow-xl p-4 h-[520px]'>
